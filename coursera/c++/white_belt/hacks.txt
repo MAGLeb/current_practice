@@ -1,0 +1,7 @@
+  vector<int> temperatures(n);
+
+  for (int& temperature : temperatures) {
+    cin >> temperature;
+  }
+
+

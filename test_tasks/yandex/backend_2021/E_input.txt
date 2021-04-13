@@ -1,0 +1,4 @@
+E_discussion.db
+suitable = 1
+level_of_trust > 10
+author
