@@ -38,7 +38,7 @@ class TextController:
 
 class RenderTimer:
     def __init__(self, time_action: int):
-        self.root = Tk()
+        self.root = Tk(className='TimerApplication')
         self.text_controller = TextController()
         self.label = StringVar()
         self.time_action = time_action
@@ -84,9 +84,10 @@ class ApplicationDesktop:
         :param action_time: time to do action
         """
 
+        time.sleep(60 * gap_time)
         while True:
-            time.sleep(60 * gap_time)
             RenderTimer(action_time)
+            time.sleep(60 * gap_time + action_time)
 
 
-ApplicationDesktop(gap_time=1)
+ApplicationDesktop()
