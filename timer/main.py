@@ -90,4 +90,4 @@ class ApplicationDesktop:
             time.sleep(60 * gap_time + action_time)
 
 
-ApplicationDesktop(gap_time=1, action_time=15)
+ApplicationDesktop(gap_time=60, action_time=15)
