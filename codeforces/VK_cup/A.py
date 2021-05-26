@@ -7,11 +7,8 @@ class TrafficLight:
         if not self.locked:
             self.color = color
 
-    def lock(self):
-        self.locked = True
-
-    def unlock(self):
-        self.locked = False
+    def toggle(self, locked):
+        self.locked = locked
 
 
 n = int(input().strip())
@@ -21,9 +18,9 @@ for _ in range(n):
     command = input().strip()
 
     if command == 'lock':
-        traffic_light.lock()
+        traffic_light.toggle(True)
     elif command == 'unlock':
-        traffic_light.unlock()
+        traffic_light.toggle(False)
     else:
         traffic_light.change_color(command)
 

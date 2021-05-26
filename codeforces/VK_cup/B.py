@@ -43,6 +43,9 @@ result = 0
 print(dictionary)
 print(array)
 
+
+
+
 for element in array:
     x, y, index = element
 
