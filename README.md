@@ -9,6 +9,11 @@ Here I have collected several repositories with experience in courses and person
 ### DataScience Course (9 months)
 - Python, SQL, Keras, Pandas, Sklearn, Gradient boosting, Linear Algebra, Machine Learning, SQL
 - Numerical methods, regression, classification, clustering, probability theory, statistical analysis
+### Coursera
+- Interface development: layout and JavaScript Specialization (2 months)
+- Machine Learning and Data Analysis Specialization (3 months)
+- The Art of Development in modern C++ Specialization (white belt)
+- Combinatorics
 ### Kaggle, Leetcode and Codeforce practice
 - https://leetcode.com/maximovglebigorevich/
 - https://www.kaggle.com/maximovgleb
