@@ -18,3 +18,4 @@ Here I have collected several repositories with experience in courses and person
 - https://leetcode.com/maximovglebigorevich/
 - https://www.kaggle.com/maximovgleb
 - https://codeforces.com/profile/magleb
+### Others...
