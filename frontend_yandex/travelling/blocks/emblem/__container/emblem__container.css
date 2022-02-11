@@ -1,0 +1,25 @@
+.emblem__container {
+    display: grid;
+    grid-template-columns: 196px 196px 196px 196px 196px;
+    justify-content: space-between;
+}
+
+@media (max-width : 1279px) {
+    .emblem__container {
+        grid-template-columns: 176px 176px 176px 176px 176px;
+    }
+}
+
+@media (max-width : 1023px) {
+    .emblem__container {
+        grid-template-columns: 196px 196px 196px;
+    }
+}
+
+@media (max-width : 767px) {
+    .emblem__container {
+        justify-content: space-around;
+        grid-template-columns: 196px;
+    }
+}
+

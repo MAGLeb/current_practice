@@ -1,0 +1,13 @@
+.lead__image {
+    position: relative;
+    width: 100%;
+    margin: 10% auto 0 auto;
+    display: flex;
+}
+
+.lead__doroga {
+    position: absolute;
+    top: 53%;
+    margin: 0 auto 0;
+    width: 100%;
+}

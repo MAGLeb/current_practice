@@ -1,0 +1,27 @@
+.emblem__container_item {
+    margin-top: 82px;
+    width: 100%;
+}
+
+.emblem__container_item-image {
+    width: 100%;
+    height: 226px;
+}
+
+.emblem__container_item-city {
+    width: 100%;
+
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 26px;
+    text-align: center;
+
+    color: #CCCCCC;
+}
+
+@media (max-width : 767px) {
+    .emblem__container_item {
+        margin-top: 32px;
+    }
+}

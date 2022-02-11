@@ -1,0 +1,11 @@
+.header__lang_en {
+    margin-left: 18px;
+
+    font-family: Inter;
+    font-size: 1.5em;
+    line-height: 1.5;
+    font-weight: 200px;
+    text-align: right;
+    
+    color: #FFFFFF;
+}

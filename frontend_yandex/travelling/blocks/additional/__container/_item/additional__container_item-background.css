@@ -1,0 +1,9 @@
+.additional__container_item-background {
+    position: absolute;
+
+    width: 100%;
+    height: calc(100% - 12px);
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}

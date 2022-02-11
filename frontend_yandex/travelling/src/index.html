@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Путешествия по России</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+</head>
+<body>
+    <div class="page">
+        <header>
+            <img src="<%= require('./images/logo.svg')%>" class="header__logo">
+            <div class="header__lang">
+                <a href="#" class="header__lang_ru">Ru</a>
+                <a href="#" class="header__lang_en">En</a>
+            </div>
+        </header>
+        <div class="content">
+            <section class="lead">
+                <h1 class="section__title">Путешествие по России</h1>
+                <h2 class="section__subtitle">Настоящая страна не в выпусках новостей, а здесь.</h2>
+                <img src="<%= require('./images/lead__image.svg')%>" class="lead__image">
+                <img src="<%= require('./images/doroga.svg')%>" class="lead__doroga">
+                <p class="lead__caption">ваша полка — верхняя</p>
+            </section>
+            <section class="intro">
+                <h2 class="intro__title">Чего мы там не видели?</h2>
+                <h3 class="intro__subtitle">Зачем путешествовать по своему дому</h3>
+                <div class="intro__content-row">
+                    <p class="intro__content-row_text">По опросам ВЦИОМ, 95% россиян мечтают куда-нибудь поехать, но только 36% планируют провести отпуск в родной стране. Мол, чего мы тут, дома, не видели? На самом деле, Россия — это целая вселенная с ласковым морем юга, густыми лесами Саян и суровыми льдами плато Путорана. А ещё увидеть все эти красоты можно без миллионов на счету, загранпаспорта и многочасовых перелетов. Как, например, Вера Башмакова — смелая молодая мама, которая взяла в охапку троих детей, усадила их в свою «Ладу» и проехала 20 тысяч километров по родной стране. Мы выбрали и описали некоторые интересные места, достойные вашего отпуска.</p>
+                    <p class="intro__content-row_author"><span class="intro__content-row_bold">Автор текста:</span> Максимов Глеб <br>
+                        <span class="intro__content-row_bold">Дата:</span> 16.04.2019</p>
+                </div>
+                <div class="intro__text">
+                    <p><span class="intro__content-row_bold">Часовых поясов</span> 11</p>
+                    <p><span class="intro__content-row_bold">Объектов природного наследия ЮНЕСКО</span> 12</p>
+                    <p><span class="intro__content-row_bold">Объектов культурного наследия ЮНЕСКО</span> 16</p>
+                    <p><span class="intro__content-row_bold">Природных заповедников</span> 105</p>
+                    <p><span class="intro__content-row_bold">Аэропортов</span> 241</p>
+                </div>
+            </section>
+            <section class="photo-grid">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-11.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-10.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-9.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-8.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-7.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-6.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-5.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-4.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-3.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-2.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item-1.jpg')%>">
+                <img class="photo-grid__item" src="<%= require('./images/photo_grid/item.jpg')%>">
+            </section>
+            <section class="places">
+                <div class="places__place">
+                    <div class="column">
+                        <h2 class="places__place_title">Куршская коса</h2>
+                        <div class="places__place_website places__place_website-margin">
+                            <p class="places__place_url">URL</p>
+                            <a href="http://park-kosa.ru/" class="places__place_adress">park-kosa.ru</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <img class="places__place_image" src="<%= require('./images/places/image-4.jpg')%>">
+                        <div class="row">
+                            <p class="places__place_text">Здесь, посреди лесов и песчаных дюн, вы сможете увидеть два водных горизонта — спокойного Куршского залива с одной стороны и подёрнутого рябью волн Балтийского моря с другой. Уникальная природная зона на краю российского анклава.</p>
+                            <p class="places__place_text2">На этом Калининградская область не заканчивается. Для путешественника и исследователя там же по соседству — самая западная точка России, Балтийская коса, — и немецкое наследие россыпи небольших приморских городов. Атмосфера здешних мест исключает суету, окуная в спокойствие природы и запах стального, прохладного моря.</p>  
+                        </div>
+                    </div>
+                </div>
+                <div class="places__place">
+                    <div class="column">
+                        <h2 class="places__place_title">Кольский</h2>
+                        <div class="places__place_website ">
+                            <p class="places__place_url">URL</p>
+                            <a href="https://yourshot.nationalgeographic.com/photos/?keywords=kolskiy" class="places__place_adress">National Geographic</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <img class="places__place_image" src="<%= require('./images/places/image-3.jpg')%>">
+                        <div class="row">
+                            <p class="places__place_text">Почти весь полуостров находится за Полярным кругом. Саамская тундра, от которой на юг — тайга, а на север — Ледовитый океан, прикидывающийся Баренцевым морем.</p>
+                            <p class="places__place_text2">Возможно, вы смотрели Звягинцева и даже слышали историю арктического фестиваля в Териберке. Возможно, слово «Хибины» не осталось под снегом школьных воспоминаний об уроках географии. Возможно, вы не интересовались пронизывающей земную кору сверхглубокой скважиной, а от апатитов вас давно накрывает апатия. Но ваша мечта увидеть северное сияние начинает сбываться с билетом в Мурманск.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="places__place">
+                    <div class="column">
+                        <h2 class="places__place_title">Алтай</h2>
+                        <div class="places__place_website">
+                            <p class="places__place_url">URL</p>
+                            <a href="https://www.facebook.com/vera.bashmakova/posts/10156011613718822" class="places__place_adress">Facebook</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <img class="places__place_image" src="<%= require('./images/places/image-2.jpg')%>">
+                        <div class="row">
+                            <p class="places__place_text">Алтай — одно из красивейших мест в России. В первую очередь из-за гор: если ехать вдоль хребта, вы увидите склоны, усыпанные соснами, горные реки и озёра. А если вы откроете в автомобиле окна, сможете познакомиться с невидимым чудом здешних мест — горным воздухом.</p>
+                            <p class="places__place_text2">Климат на Алтае умеренный, поэтому ехать сюда лучше всего летом. Так вы увидите всё разнообразие местной флоры и фауны. По лесам Алтая бродят лоси, над хребтами летают орлы, а на равнинах пасутся косули. И знаменитые манулы — тоже обитатели Алтайского края.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="places__place">
+                    <div class="column">
+                        <h2 class="places__place_title">Зимний Байкал</h2>
+                        <div class="places__place_website places__place_website-margin">
+                            <p class="places__place_url">URL</p>
+                            <a href="https://vk.com/baikalmile" class="places__place_adress">https://vk.com/baikalmile</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <img class="places__place_image" src="<%= require('./images/places/image-1.jpg')%>">
+                        <div class="row">
+                            <p class="places__place_text">Всем известен Байкал как крупнейшее озеро в мире. Многие также знают, что это самый большой источник пресной воды и одно из красивейших мест в России.</p>
+                            <p class="places__place_text2">Конечно, это всё так. Но Байкал ещё идеальное место для соревнований по скийорингу. Это такой вид спорта, когда лыжник привязывает себя к мотоциклу, и тандем старается развить как можно бóльшую скорость на льду. В марте 2019 года на фестивале «Байкальская миля» был поставлен мировой рекорд — 197.011 км/ч.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="places__place">
+                    <div class="column">
+                        <h2 class="places__place_title">Карелия</h2>
+                        <div class="places__place_website">
+                            <p class="places__place_url">URL</p>
+                            <a href="http://vodlozero.ru/" class="places__place_adress">http://vodlozero.ru/</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <img class="places__place_image" src="<%= require('./images/places/image.jpg')%>">
+
+                        <p class="places__place_text">Сибирь заканчивается не на Урале, а в Карелии: образующая тайгу сибирская лиственница не растёт западнее Водлозера. Зато здесь она вымахивает на 30 метров — леса карельских национальных парков из-за непроходимых болот никогда не знали топора. Некоторым соснам уже больше чем полтысячелетия. Прикоснитесь к живому существу, видевшему солнце раньше, чем увидал его Иван Грозный. В девственном лесу на сотню километров не встретишь тропы. А на редких тропинках деревья в паре метров от земли помечены медвежьими когтями. Чтобы все знали, кто тут хозяин.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="video">
+                <h2 class="video__content-title">В глубины Земли и в дальний космос</h2>
+                <h3 class="video__content-subtitle">Видео от студии Stereotactic о местах в России, где ведутся фундаментальные исследования</h3>
+                <div class="video__container">
+                    <a href="https://vimeo.com/81106671" class="video__container_item">
+                        <img class="video__container_item-background" src="<%= require('./images/video/Image-1.png')%>" alt="Kamchatka">              
+                        <img class="video__container_item-icon" src="<%= require('./images/icon_play.png')%>" alt="icon-play">
+                        <p class="video__container_item-duration">6:30</p>
+                        <h2 class="video__container_item-title">Colors of Kamchatka</h2>
+                        <p class="video__container_item-author">Director: Pavel Karykhalin</p>
+                    </a>
+                    <a href="https://vimeo.com/290675450" class="video__container_item">
+                        <img class="video__container_item-background" src="<%= require('./images/video/Image.png')%>" alt="Observatory">
+                        <img class="video__container_item-icon" src="<%= require('./images/icon_play.png')%>" alt="icon-play">
+                        <p class="video__container_item-duration">24:45</p>
+                        <h2 class="video__container_item-title">Обсерватория | Observatory</h2>
+                        <p class="video__container_item-author">Director: Alexander Khudokon </p>
+                    </a>
+                </div>
+            </section>
+            <section class="additional">
+                <h2 class="additional__content-title">А также</h2>
+                <h3 class="additional__content-subtitle">места, рекомендованные нашими фотографами</h3>
+                <div class="additional__container">
+                    <div class="additional__container_item">
+                        <div class="additional__container_item-background"></div>
+                        <img class="additional__container_item-image" src="<%= require('./images/additional/Image-3.png')%>" alt="Byhta">
+                        <h2 class="additional__container_item-title">Новороссийская бухта</h2>
+                        <p class="additional__container_item-text">Главный торговый порт не курорт, но море здесь лазурное, и толпы кораблей на рейде. Залюбуешься.</p>
+                    </div>
+                    <div class="additional__container_item">
+                        <div class="additional__container_item-background"></div>
+                        <img class="additional__container_item-image" src="<%= require('./images/additional/Image-2.png')%>" alt="Shihan">
+                        <h2 class="additional__container_item-title">Аракульский шихан</h2>
+                        <p class="additional__container_item-text">Даже для Южного Урала, где красиво везде, это пейзаж выдающийся. И там отсутствует несносная мошкá.</p>
+                    </div>
+                    <div class="additional__container_item">
+                        <div class="additional__container_item-background"></div>
+                        <img class="additional__container_item-image" src="<%= require('./images/additional/Image-1-2.png')%>" alt="Cherepovec">
+                        <h2 class="additional__container_item-title">Череповец</h2>
+                        <p class="additional__container_item-text">Громадный металлургический комбинат на водном пути с Волги в Балтийское море. В нём есть своя красота.</p>
+                    </div>
+                    <div class="additional__container_item">
+                        <div class="additional__container_item-background"></div>
+                        <img class="additional__container_item-image" src="<%= require('./images/additional/Image-2-2.png')%>" alt="Lenivets">
+                        <h2 class="additional__container_item-title">Никола-Ленивец</h2>
+                        <p class="additional__container_item-text">Оцените ответ современных художников идолам капища, которое было тут при древнем поселении на реке Угра.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="comments">
+                <h2 class="comments__content-title">Фотографы, снимающие Россию</h2>
+                <h3 class="comments__content-subtitle">Природа и люди вдохновили их работы, удостоенные наград на международных конкурсах</h3>
+                <div class="comments__container">
+                    <div class="comments__container_item">
+                        <img class="comments__container_item-image" src="<%= require('./images/comments/untitled.jpg')%>">
+                        <div class="column-reverse">
+                            <p class="comments__container_item-quote">«Если вам кажется, что в России ничего не происходит, то просто выгляньте “наружу”…»</p>
+                            <p class="comments__container_item-author">Виктор Лягушкин</p>
+                        </div>
+                    </div>
+                    <div class="comments__container_item">
+                        <img class="comments__container_item-image" src="<%= require('./images/comments/untitled (1).jpg')%>">
+                        <div class="column-reverse">
+                            <p class="comments__container_item-quote">«Если в город едут туристы — неважно за чем они туда едут: за шамбалой или фрески Рублева искать, или на родину Тарковского — туристы обеспечивают любой город молодёжью, рабочими местами и в конечном счёте наполняют его жизнью.»</p>
+                            <p class="comments__container_item-author">Иван Хафизов</p>
+                        </div>
+                    </div>
+                    <div class="comments__container_item">
+                        <img class="comments__container_item-image" src="<%= require('./images/comments/untitled (2).jpg')%>">
+                        <div class="column-reverse">
+                            <p class="comments__container_item-quote">«Ты приезжаешь, и люди рассказывают тебе, как им плохо. А когда ты покажешь, как им плохо, то ты сволочь и всё очернил.»</p>
+                            <p class="comments__container_item-author">Сергей Максимишин</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="cover">
+                <a href="https://stampsy.com/na-elektrichkakh-do-baikala">
+                    <h2 class="cover__content-title">До Байкала «на собаках»</h2>
+                    <h3 class="cover__content-subtitle">По мотивам учебной темы о Транссибе и iframes — путешествие от столицы до Байкала на электричках.</h3>
+                    <img class="cover__content-background" src="<%= require('./images/cover__image.png')%>" alt="Relsy">
+                </a>
+            </section>
+            <section class="emblem">
+                <h2 class="emblem__content-title">Природа на гербах российских городов</h2>
+                <div class="emblem__container">
+                    <div class="emblem__container_item">
+                        <img class="emblem__container_item-image" src="<%= require('./images/emblems/image.png')%>">
+                        <p class="emblem__container_item-city">Великий Новгород</p>
+                    </div>
+                    <div class="emblem__container_item">
+                        <img class="emblem__container_item-image" src="<%= require('./images/emblems/image (1).png')%>">
+                        <p class="emblem__container_item-city">Ростов Великий</p>
+                    </div>
+                    <div class="emblem__container_item">
+                        <img class="emblem__container_item-image" src="<%= require('./images/emblems/image (2).png')%>">
+                        <p class="emblem__container_item-city">Тамбов</p>
+                    </div>
+                    <div class="emblem__container_item">
+                        <img class="emblem__container_item-image" src="<%= require('./images/emblems/image (3).png')%>">
+                        <p class="emblem__container_item-city">Елабуга</p>
+                    </div>
+                    <div class="emblem__container_item">
+                        <img class="emblem__container_item-image" src="<%= require('./images/emblems/image (4).png')%>">
+                        <p class="emblem__container_item-city">Пермь</p>
+                    </div>
+                </div>
+            </section>
+            <section class="barentsburg">
+                <h2 class="barentsburg__content-title">Баренцбург</h2>
+                <h3 class="barentsburg__content-cords">78.0648° с.ш. 14.2335° в.д.</h3>
+                <img class="barentsburg__content-image" src="<%= require('./images/barentsburg__map.jpg')%>" alt="Barentsburg">
+                <div class="row-reserve">
+                    <p class="barentsburg__content-text">Арктика и соседство с Норвегией — мало кто знает о жизни самого западного российского посёлка, который находится на Шпицбергене.</p>
+                    <div class="barentsburg__container">
+                        <p class="barentsburg__container_url">URL</p>
+                        <a class="barentsburg__container_link" href="https://meduza.io/feature/2016/03/02/umeret-ili-roditsya-zdes-prakticheski-nevozmozhno">Умереть или родиться здесь практически невозможно</a>
+                    </div>
+                </div>
+            </section>
+            <nav class="footer">
+                <div class="footer__content">
+                    <a href="https://yandex.ru/maps/" class="footer__link">Карты</a>
+                    <a href="https://yandex.ru/pogoda/" class="footer__link">Погода</a>
+                    <a href="https://rasp.yandex.ru/" class="footer__link">Расписание</a>
+                    <a href="https://calendar.yandex.ru/" class="footer__link">Календарь</a>
+                    <a href="https://travel.yandex.ru" class="footer__link">Путешествия</a>
+                    <p class="footer__copyright">&#169; 2019. Максимов Глеб</p>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    
+</body>
+<script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+</html>

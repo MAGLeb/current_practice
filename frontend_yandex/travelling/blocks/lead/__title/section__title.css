@@ -1,0 +1,19 @@
+.section__title {
+    min-width: 80%;
+    max-width: 782px;
+    margin: 0 auto 0;
+    
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1em;
+    line-height: 1;
+    text-align: center;
+    
+    color: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+    .section__title {
+        font-size: 0.8em;
+    }
+}

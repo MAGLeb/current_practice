@@ -1,0 +1,43 @@
+@import url('./__content/cover__content.css');
+
+.cover {
+    position: relative;
+    width: 1184px;
+    height: 594px;
+    margin: 102px auto 0;
+}
+
+.cover a:hover {
+    opacity: 1;
+}
+
+@media (max-width : 1184px) {
+    .cover {
+        width:100%;
+        height: 580px;
+    }
+}
+
+@media (max-width : 767px) {
+    .cover {
+        height: 375px;
+    }
+}
+
+@media (max-width : 500px) {
+    .cover {
+        height: 300px;
+    }
+}
+
+@media (max-width : 375px) {
+    .cover {
+        height: 272px;
+    }
+}
+
+@media (max-width : 320px) {
+    .cover {
+        height: 216px;
+    }
+}

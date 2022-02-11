@@ -1,0 +1,21 @@
+@import url('_en/header__lang_en.css');
+@import url('./_ru/header__lang_ru.css');
+
+.header__lang {
+    position: absolute;
+    display: flex;
+    margin: 17px 0 12px calc(95% - 50px);
+    font-size: 16px;
+}
+
+@media (max-width : 320px) {
+    .header__lang {
+        font-size: 12px;
+    }
+}
+
+@media (max-width : 768px) {
+    .header__lang {
+        font-size: 14px;
+    }
+}

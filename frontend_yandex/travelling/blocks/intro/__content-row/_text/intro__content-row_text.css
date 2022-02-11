@@ -1,0 +1,31 @@
+.intro__content-row_text {
+    max-width: 683px;
+
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 23px;
+
+    color: #FFFFFF;
+}
+
+@media (max-width : 768px) {
+    .intro__content-row_text {
+        width: 96%;
+    }
+}
+
+@media (max-width : 375px) {
+    .intro__content-row_text {
+        width: 96%;
+        font-size: 16px;
+        line-height: 28px;
+    }
+}
+
+@media (max-width : 320px) {
+    .intro__content-row_text {
+        font-size: 18px;
+        line-height: 30px;
+    }
+}

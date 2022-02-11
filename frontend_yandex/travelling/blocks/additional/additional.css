@@ -1,0 +1,34 @@
+@import url('./__content/additional__content-subtitle.css');
+@import url('./__content/additional__content-title.css');
+@import url('./__container/additional__container.css');
+
+.additional {
+    width: 1184px;
+    margin: 102px auto 0;
+    height: 100%;
+}
+
+@media (max-width : 1279px) {
+    .additional {
+        width: 95%;
+    }
+}
+
+@media (max-width : 1023px) {
+    .additional {
+        width: 85%;
+    }
+}
+
+@media (max-width : 768px) {
+    .additional {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width : 767px) {
+    .additional {
+        margin-top: 64px;
+    }
+}
+

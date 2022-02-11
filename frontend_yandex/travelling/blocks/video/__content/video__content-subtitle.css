@@ -1,0 +1,27 @@
+.video__content-subtitle {
+    width: 640px;
+    margin: 48px auto 0;
+
+    font-family: Inter;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: 300;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+@media (max-width : 700px) {
+    .video__content-subtitle {
+        max-width: 100%; 
+    }
+}
+
+@media (max-width : 500px) {
+    .video__content-subtitle {
+        margin-top: 16px;
+        max-width: 100%; 
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

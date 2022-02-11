@@ -1,0 +1,25 @@
+.section__subtitle {
+    min-width: 50%;
+    max-width: 583px;
+    margin: 3% auto 0;
+    
+    font-family: Inter;
+    font-size: 0.3125em;
+    font-weight: 300;
+    line-height: normal;
+    text-align: center;
+    
+    color: #FFFFFF;
+}
+
+@media (max-width : 768px) {
+    .section__subtitle {
+        max-width: 60%;
+    }
+}
+
+@media (max-width : 500px) {
+    .section__subtitle {
+        max-width: 70%;
+    }
+}

@@ -1,0 +1,141 @@
+.places__place {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: 72px 0 0 0;
+}
+
+.places__place_title {
+    width: 56%;
+    font-family: Inter;
+    font-size: 72px;
+    line-height: 85px;
+
+    color: #FFFFFF;
+}
+
+.places__place_image {
+    width: 460px;
+    height: 460px;
+    margin-top: 60px;
+}
+
+.places__place_website {
+    position: absolute;
+    left: 47%;
+    display: flex;
+    flex-direction: column;
+    margin: 7px 0 0 40px;
+}
+
+.places__place_url {
+
+    font-family: Inter;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.2em;
+
+    color: #AAAAAA;
+}
+
+.places__place_adress {
+    margin: 16px 0 0 0;
+
+    font-family: Inter;
+    font-size: 18px;
+    line-height: 30px;
+    text-decoration-line: underline;
+    
+    color: #FFFFFF;
+}
+
+.places__place_text {
+    margin: 50px 0 0 40px;
+
+    font-family: Inter;
+    font-size: 18px;
+    line-height: 30px;
+    
+    color: #FFFFFF;
+}
+
+.places__place_text2 {
+    margin: 50px 0 0 40px;
+
+    font-family: Inter;
+    font-size: 18px;
+    line-height: 30px;
+    
+    color: #FFFFFF;
+}
+
+.places__place_website-margin {
+    margin-top: 75px;
+}
+
+/* Ниже два класса для перевертывания строк-столбцов. Я уверен, что 
+можно было сделать проще, но на момент написания, мне показалось, что так будет работать. И получилось заебись! */
+
+.column {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Аддаптивная верстка */
+
+@media (max-width : 768px) {
+    .places__place_website-margin {
+        margin-top: 20px;
+    }
+    .places__place_image {
+        width: 340px;
+        height: 340px;
+    }
+    .places__place_title {
+        font-size: 42px;
+        line-height: 46px;
+    }
+    .places__place:first-child {
+        margin-top: 54px;
+    }
+    .places__place:first-child .places__place_title {
+        width: 90%;
+    }
+}
+
+@media (max-width : 720px) {
+    
+    .places__place {
+        flex-direction: column;
+        margin-top: 48px;
+    }
+
+    .places__place_website {
+        position: relative;
+        margin: 16px 16px 32px 16px;
+        left: 0;
+    }
+
+    .places__place_title {
+        margin-left: 16px;
+        width: 69%;
+    }
+
+    .places__place_image {
+        width: 100%;
+        margin-top: 0;
+    }
+    .places__place_text {
+        margin: 20px 0 0 16px;
+    }
+    .places__place_text2 {
+        margin: 24px 0 0 16px;
+    }
+}

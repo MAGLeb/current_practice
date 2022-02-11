@@ -1,0 +1,27 @@
+.additional__content-subtitle {
+    width: 640px;
+    margin: 48px auto 0;
+
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 34px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+@media (max-width : 1023px) {
+    .additional__content-subtitle {
+        width: 90%;
+        margin-top: 24px;
+    }
+}
+
+@media (max-width : 767px) {
+    .additional__content-subtitle {
+        font-size: 16px;
+        line-height: 23px;
+        margin-top: 16px;
+    }
+}
