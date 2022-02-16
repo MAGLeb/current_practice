@@ -5,4 +5,4 @@
 *.gz
 *.npz
 *.npy
-./english/outcomes_4_upper_intermediate_student_s_book.pdf
+*outcomes_4_upper_intermediate_student_s_book.pdf
