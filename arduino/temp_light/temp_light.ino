@@ -71,6 +71,6 @@ void loop() {
     digitalWrite(i, LOW);
   }
 
-  if(light < (light_min + light_max) / 2)
-    tone(SOUND_PIN, 2000, 1000);
+  if(light > (light_min + light_max) / 2)
+    tone(SOUND_PIN, 3000, 100);
 }
