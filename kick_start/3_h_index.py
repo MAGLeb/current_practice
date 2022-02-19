@@ -3,10 +3,8 @@ from typing import List
 
 
 def get_h_index(c: List[int]):
-    result = []
-    d = {0: 0}
-    ans = 0
-    curr = 0
+    result = [0]
+    d = {0: 1}
 
     for i in range(len(c)):
         number = c[i]
@@ -16,16 +14,20 @@ def get_h_index(c: List[int]):
         else:
             d[number] = 1
 
-        if ans in d:
-            key = ans
-            ans -= d[key]
-            del d[key]
+        counter = 0
+        last_elem = result[-1]
+        for key in sorted(d):
+            if key in d and key > last_elem:
+                counter += d[key]
 
-        ans += 1
-        curr = max(ans, curr)
-        result.append(curr)
+        if counter > last_elem:
+            result.append(counter)
+            if last_elem in d:
+                del d[last_elem]
+        else:
+            result.append(last_elem)
 
-    return result
+    return result[1:]
 
 
 def main():
