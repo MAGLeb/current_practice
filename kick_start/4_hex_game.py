@@ -3,10 +3,7 @@ from typing import List
 from collections import Counter
 from copy import deepcopy
 
-BLUE_DIRECTIONS_SOUTH = ((0, 1), (-1, 1), (-1, 0), (0, -1), (1, -1), (1, 0))
-BLUE_DIRECTIONS_NORTH = ((0, 1), (1, 0), (1, -1), (0, -1), (-1, 0), (-1, 1))
-RED_DIRECTIONS_WEST = ((-1, 0), (0, -1), (1, -1), (1, 0), (0, 1), (-1, 1))
-RED_DIRECTIONS_EAST = ((1, 0), (1, -1), (0, -1), (-1, 0), (-1, 1), (0, 1))
+DIRECTIONS = ((0, 1), (-1, 1), (-1, 0), (0, -1), (1, -1), (1, 0))
 
 
 def solve(original_board: List[List]) -> str:
@@ -51,25 +48,29 @@ def step(board, color, left, right, directions):
 
 def red_east_path(board):
     n = len(board)
-    left, right = (0, n - 2), (0, n - 1)
+    left, right = (0, 1), (0, 0)
     path = set()
 
     while left[0] != n - 1:
+        if left[0] == 0:
+            path = set()
         path.add(left)
-        left, right = step(board, 'R', left, right, RED_DIRECTIONS_EAST)
-        if right[1] == 0:
+        left, right = step(board, 'R', left, right, DIRECTIONS)
+        if right[1] == n - 1:
             return None
     return path
 
 
 def red_west_path(board):
     n = len(board)
-    left, right = (n - 1, n - 2), (n - 1, n - 1)
+    left, right = (0, n - 2), (0, n - 1)
     path = set()
 
-    while left[0] != 0:
+    while left[0] != n - 1:
+        if left[0] == 0:
+            path = set()
         path.add(left)
-        left, right = step(board, 'R', left, right, RED_DIRECTIONS_WEST)
+        left, right = step(board, 'R', left, right, DIRECTIONS[::-1])
         if right[1] == 0:
             return None
     return path
@@ -81,8 +82,10 @@ def blue_north_path(board):
     path = set()
 
     while left[1] != n - 1:
+        if left[1] == 0:
+            path = set()
         path.add(left)
-        left, right = step(board, 'B', left, right, BLUE_DIRECTIONS_NORTH)
+        left, right = step(board, 'B', left, right, DIRECTIONS[::-1])
         if right[0] == n - 1:
             return None
     return path
@@ -94,15 +97,17 @@ def blue_south_path(board):
     path = set()
 
     while left[1] != n - 1:
+        if left[1] == 0:
+            path = set()
         path.add(left)
-        left, right = step(board, 'B', left, right, BLUE_DIRECTIONS_SOUTH)
+        left, right = step(board, 'B', left, right, DIRECTIONS)
         if right[0] == 0:
             return None
     return path
 
 
-def intersection(south_path: List, north_path: List):
-    return len(set(south_path) - set(north_path)) < len(south_path)
+def intersection(first_path: List, second_path: List):
+    return len(set(first_path) - set(second_path)) < len(first_path)
 
 
 def padding(original_board):
