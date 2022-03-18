@@ -4,18 +4,14 @@ using namespace std;
 
 int main() {
   unsigned long long result;
-  u_long squared;
-  for(int i = 0; i <= 100; ++i) {
-    squared += i * i;
-    result += i
+
+  for(int i = 1; i <= 100; ++i) {
+    for(int j = i + 1; j <= 100; ++j) {
+      cout << i << " " << j << endl;
+      result += 2 * i * j;
+    }
   }
 
-  for(int i = 0; i <= 100; ++i) {
-
-  }
-
-  cout << squared << endl;
   cout << result << endl;
-  cout << result * result << endl;
 
 }
