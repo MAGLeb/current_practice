@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <bits/stdc++.h>
 #include <cassert>
 #include <iostream>
 #include <map>
@@ -16,8 +17,6 @@ struct Query {
   vector<string> stops;
 };
 
-
-
 ostream &operator<<(ostream &os, Query &q) {
   os << "Type: " << static_cast<int>(q.type) << " "
      << " bus: " << q.bus << " "
@@ -27,26 +26,26 @@ ostream &operator<<(ostream &os, Query &q) {
 }
 
 istream &operator>>(istream &is, Query &q) {
-  Query query;
   string query_type;
   is >> query_type;
+  q.stops.resize(0);
 
   if (query_type == "ALL_BUSES") {
-    query.type = QueryType::AllBuses;
+    q.type = QueryType::AllBuses;
   } else if (query_type == "BUSES_FOR_STOP") {
-    query.type = QueryType::BusesForStop;
-    is >> query.stop;
+    q.type = QueryType::BusesForStop;
+    is >> q.stop;
   } else if (query_type == "STOPS_FOR_BUS") {
-    query.type = QueryType::StopsForBus;
-    is >> query.bus;
+    q.type = QueryType::StopsForBus;
+    is >> q.bus;
   } else if (query_type == "NEW_BUS") {
-    query.type = QueryType::NewBus;
+    q.type = QueryType::NewBus;
     int number_stops;
-    is >> query.bus >> number_stops;
+    is >> q.bus >> number_stops;
     while (number_stops--) {
       string stop;
       is >> stop;
-      query.stops.push_back(stop);
+      q.stops.push_back(stop);
     }
   }
 
@@ -146,7 +145,7 @@ public:
         result.stops.push_back(stop);
         for (auto &other_bus : buses_for_stop.at(stop)) {
           if (other_bus != bus)
-            result.stops_for_bus.at(stop).push_back(other_bus);
+            result.stops_for_bus[stop].push_back(other_bus);
         }
       }
     }
@@ -164,7 +163,34 @@ public:
   }
 };
 
+void TestAddBuses() {
+  BusManager bm;
+
+  cout << bm.GetAllBuses() << endl;
+  cout << bm.GetBusesForStop("Bolagoe") << endl;
+  cout << bm.GetStopsForBus("32k") << endl;
+
+  bm.AddBus("32", vector<string>({"Tolstopaltsevo", "Marushkino", "Vnukovo"}));
+  cout << bm.GetAllBuses() << endl;
+  bm.AddBus("32K", vector<string>({"Tolstopaltsevo", "Marushkino", "Vnukovo", "Peredelkino", "Solntsevo", "Smirnova"}));
+  cout << bm.GetAllBuses() << endl;
+
+//  bm.AddBus("950", vector<string>({"Ostashkino", "Marushkino", "Vnukovo", "Peredelkino", "Solntsevo", "Smirnova"}));
+//
+//  cout << bm.GetAllBuses() << endl;
+//  cout << bm.GetBusesForStop("Ostashkino") << endl;
+//  cout << bm.GetBusesForStop("Peredelkino") << endl;
+//  cout << bm.GetStopsForBus("66") << endl;
+//  cout << bm.GetStopsForBus("66K") << endl;
+//  cout << bm.GetStopsForBus("950") << endl;
+//
+//  cout << bm.GetAllBuses() << endl;
+}
+
 int main() {
+//  TestAddBuses();
+//  return 0;
+
   int query_count;
   Query q;
 
@@ -173,7 +199,6 @@ int main() {
   BusManager bm;
   for (int i = 0; i < query_count; ++i) {
     cin >> q;
-    cout << q;
 
     switch (q.type) {
     case QueryType::NewBus:
@@ -186,7 +211,6 @@ int main() {
       cout << bm.GetStopsForBus(q.bus) << endl;
       break;
     case QueryType::AllBuses:
-      cout << "test" << endl;
       cout << bm.GetAllBuses() << endl;
       break;
     }
