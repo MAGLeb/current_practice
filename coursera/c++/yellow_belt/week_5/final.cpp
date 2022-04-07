@@ -3,9 +3,9 @@
 
 using namespace std;
 
-class Person {
+class Human {
 public:
-  Person(const string &type, const string &name) : type_(type), name_(name){};
+  Human(const string &type, const string &name) : type_(type), name_(name){};
 
   string Name() const { return name_; };
   string Type() const { return type_; };
@@ -14,19 +14,19 @@ public:
   };
 
 private:
-  string type_ = "Person type";
-  string name_ = "person name";
+  const string type_ = "Human type";
+  const string name_ = "Human name";
 };
 
-class Student : public Person {
+class Student : public Human {
 public:
   Student(const string &name, const string &favouriteSong)
-      : Person("Student", name), favouriteSong_(favouriteSong) {}
+      : Human("Student", name), favouriteSong_(favouriteSong) {}
 
   void Learn() const { cout << Type() << ": " << Name() << " learns" << endl; }
 
   void Walk(const string &destination) const override {
-    Person::Walk(destination);
+    Human::Walk(destination);
     SingSong();
   }
 
@@ -39,10 +39,10 @@ private:
   const string favouriteSong_;
 };
 
-class Teacher : public Person {
+class Teacher : public Human {
 public:
   Teacher(const string &name, const string &subject)
-      : Person("Teacher", name), subject_(subject) {}
+      : Human("Teacher", name), subject_(subject) {}
 
   void Teach() const {
     cout << Type() << ": " << Name() << " teaches: " << subject_ << endl;
@@ -52,19 +52,19 @@ public:
   const string subject_;
 };
 
-class Policeman : public Person {
+class Policeman : public Human {
 public:
-  Policeman(const string &name) : Person("Policeman", name) {}
+  Policeman(const string &name) : Human("Policeman", name) {}
 
-  void Check(const Person &person) const {
-    cout << Type() << ": " << Name() << " checks " << person.Type() << ". "
-         << person.Type() << "'s name is: " << person.Name() << endl;
+  void Check(const Human &human) const {
+    cout << Type() << ": " << Name() << " checks " << human.Type() << ". "
+         << human.Type() << "'s name is: " << human.Name() << endl;
   }
 };
 
-void VisitPlaces(const Person &person, const vector<string> &places) {
+void VisitPlaces(Human &human, const vector<string> &places) {
   for(auto place : places) {
-    person.Walk(place);
+    human.Walk(place);
   }
 }
 
