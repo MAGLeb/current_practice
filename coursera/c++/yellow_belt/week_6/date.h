@@ -7,7 +7,7 @@ using namespace std;
 class Date {
 public:
   Date(string &date);
-  const string& GetDate();
+  string GetDate() const;
   time_t AsTimestamp() const;
 
 private:
@@ -18,3 +18,7 @@ private:
 };
 
 Date ParseDate(istream &is);
+bool &operator<(const Date &lhs, const Date &rhs);
+bool &operator==(const Date &lhs, const Date &rhs);
+bool &operator!=(const Date &lhs, const Date &rhs);
+ostream &operator<<(ostream &os, const Date &d);

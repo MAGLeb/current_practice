@@ -6,6 +6,11 @@
 
 using namespace std;
 
+string AddLeadingZeroes(int &number, const int max_zeroes) {
+  string s = to_string(number);
+  return string(abs((int)s.size() - max_zeroes), '0') + s;
+}
+
 Date::Date(string &date) {
   auto it_first = begin(date);
   auto it_second = find(it_first, end(date), '-');
@@ -18,11 +23,22 @@ Date::Date(string &date) {
   it_first = it_second + 1;
   day_ = stoi(string(it_first, end(date)));
 
-  date_ = to_string(year_) + '-' + to_string(month_) + '-' + to_string(day_);
+  date_ = AddLeadingZeroes(year_, 4) + '-' + AddLeadingZeroes(month_, 2) + '-' +
+          AddLeadingZeroes(day_, 2);
 }
 
-const string &Date::GetDate() {
-  return date_;
+string Date::GetDate() const { return date_; }
+
+time_t Date::AsTimestamp() const {
+  tm t;
+  t.tm_sec = 0;
+  t.tm_min = 0;
+  t.tm_hour = 0;
+  t.tm_mday = day_;
+  t.tm_mon = month_ - 1;
+  t.tm_year = year_ - 1900;
+  t.tm_isdst = 0;
+  return mktime(&t);
 }
 
 const Date ParseDate(istream &is) {
@@ -32,14 +48,19 @@ const Date ParseDate(istream &is) {
   return date;
 }
 
-time_t Data::AsTimestamp() const {
-  tm t;
-  t.tm_sec = 0;
-  t.tm_min = 0;
-  t.tm_hour = 0;
-  t.tm_mday = day;
-  t.tm_mon = month - 1;
-  t.tm_year = year - 1900;
-  t.tm_isdst = 0;
-  return mktime(&t);
+bool &operator<(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() < 0;
+}
+
+bool &operator==(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() == 0;
+}
+
+bool &operator!=(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() != 0;
+}
+
+ostream &operator<<(ostream &os, const Date &d) {
+  os << d.date_;
+  return os;
 }
