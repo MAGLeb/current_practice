@@ -2,37 +2,46 @@
 
 #include "date.h"
 
+#include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
 
 enum class Comparison {
-  Less, LessOrEqual, Greater, GreaterOrEqual, Equal, NotEqual;
+  Less,
+  LessOrEqual,
+  Greater,
+  GreaterOrEqual,
+  Equal,
+  NotEqual
 };
 
-enum class LogicalOperation { Or, And; };
+enum class LogicalOperation { Or, And };
 
 class Node {
 public:
-  virtual  Evaluate(const Date &date, const string &event);
+  Node();
+  virtual bool Evaluate(const Date &date, const string &event) = 0;
 };
 
-class EmptyNode : public Node {};
+class EmptyNode : public Node {
+public:
+  EmptyNode();
+  bool Evaluate(const Date &date, const string &event) override;
+};
 
 class DateComparisonNode : public Node {
 public:
-  DateComparisonNode(const Comparison &cmp, const Date &date)
-      : cmp_(cmp), date_(date);
+  DateComparisonNode(const Comparison &cmp, const Date &date);
   bool Evaluate(const Date &date, const string &event) override;
 
 private:
-  Comparison cmp_;
-  Date date_;
+  const Comparison cmp_;
+  const Date date_;
 };
 
 class EventComparisonNode : public Node {
 public:
-  EventComparisonNode(const Comparison &cmp, const string &event)
-      : cmp_(cmp), event_(event);
+  EventComparisonNode(const Comparison &cmp, const string &event);
   bool Evaluate(const Date &date, const string &event) override;
 
 private:
@@ -42,13 +51,13 @@ private:
 
 class LogicalOperationNode : public Node {
 public:
-  LogicalOperationNode(const LogicalOperation &operation, const Node &left,
-                       const Node &right)
-      : operation_(operation), left_(left), right_(right);
+  LogicalOperationNode(const LogicalOperation &operation,
+                       const shared_ptr<Node> &left,
+                       const shared_ptr<Node> &right);
   bool Evaluate(const Date &date, const string &event) override;
 
 private:
   LogicalOperation operation_;
-  Node right_;
-  Node left_;
+  shared_ptr<Node> right_;
+  shared_ptr<Node> left_;
 };

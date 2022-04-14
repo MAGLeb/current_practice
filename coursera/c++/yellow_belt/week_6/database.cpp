@@ -1,11 +1,51 @@
 #include <algorithm>
-#include <stdexcept>
 #include <iostream>
+#include <set>
 
 #include "database.h"
 using namespace std;
 
-void DataBase::Add(const Date &date, const string &event) {
+template <class T> ostream &operator<<(ostream &os, const vector<T> &s) {
+  os << "{";
+  bool first = true;
+  for (const auto &x : s) {
+    if (!first) {
+      os << ", ";
+    }
+    first = false;
+    os << x;
+  }
+  return os << "}";
+}
+
+template <class T> ostream &operator<<(ostream &os, const set<T> &s) {
+  os << "{";
+  bool first = true;
+  for (const auto &x : s) {
+    if (!first) {
+      os << ", ";
+    }
+    first = false;
+    os << x;
+  }
+  return os << "}";
+}
+
+template <class K, class V>
+ostream &operator<<(ostream &os, const map<K, V> &m) {
+  os << "{";
+  bool first = true;
+  for (const auto &kv : m) {
+    if (!first) {
+      os << ", ";
+    }
+    first = false;
+    os << kv.first << ": " << kv.second;
+  }
+  return os << "}";
+}
+
+void Database::Add(const Date &date, const string &event) {
   auto it = find_if(begin(date_event_set), end(date_event_set),
                     [date, event](const pair<Date, string> &p) {
                       return p.first == date && p.second == event;
@@ -26,7 +66,7 @@ void DataBase::Add(const Date &date, const string &event) {
          << ", was not added to date_event_mapper." << endl;
 }
 
-void DataBase::Print(ostream &os) const {
+void Database::Print(ostream &os) const {
   string s = "0-0-0";
   Date date(s);
   bool first = true;
@@ -44,19 +84,55 @@ void DataBase::Print(ostream &os) const {
   }
 }
 
-Date DataBase::Last(const Date &date) {
-  auto it = find_if(begin(date_event_set), end(date_event_set),
-                    [date](const pair<Date, string> &p) {
-                      return date < p.first;
-                    });
+pair<Date, string> Database::Last(const Date &date) const {
+  auto it =
+      find_if(begin(date_event_set), end(date_event_set),
+              [date](const pair<Date, string> &p) { return date < p.first; });
 
-  if (it == begin(date_event_set))
+  if (it-- == begin(date_event_set))
     throw invalid_argument("No dates before");
 
-  return (*it--).first;
+  return make_pair(it->first, date_event_mapper.at(it->first).back());
+}
+
+int Database::RemoveIf(function<bool(const Date &, const string &)> predicate) {
+  vector<pair<Date, string>> v(begin(date_event_set), end(date_event_set));
+  auto it = stable_partition(v.begin(), v.end(),
+                             [predicate](const pair<Date, string> &p) {
+                               return predicate(p.first, p.second);
+                             });
+  int result = distance(begin(v), it);
+  date_event_set = set<pair<Date, string>, CustomCompare>(it, end(v));
+
+  auto start = begin(v);
+  while (start != it) {
+    auto it_event = find(begin(date_event_mapper.at((*start).first)),
+                         end(date_event_mapper.at((*start).first)), (*start).second);
+    date_event_mapper.at((*start).first).erase(it_event);
+    if (date_event_mapper.at(start->first).empty()) {
+      date_event_mapper.erase(start->first);
+    }
+    start++;
+  }
+
+  return result;
+}
+
+vector<pair<Date, string>>
+Database::FindIf(function<bool(const Date &, const string &)> predicate) const {
+  vector<pair<Date, string>> result;
+  for (auto p : date_event_set) {
+    if (predicate(p.first, p.second))
+      result.push_back(p);
+  }
+  return result;
 }
 
 bool CustomCompare::operator()(const pair<Date, string> &lhs,
-                               const pair<Date, string> &rhs) {
-  return lhs.first < rhs.first;
+                               const pair<Date, string> &rhs) const {
+  if (lhs.first == rhs.first) {
+    return lhs.second < rhs.second;
+  } else {
+    return lhs.first < rhs.first;
+  }
 }

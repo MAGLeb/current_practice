@@ -1,5 +1,3 @@
-#pragma once
-
 #include "date.h"
 #include <algorithm>
 #include <iostream>
@@ -11,13 +9,21 @@ string AddLeadingZeroes(int &number, const int max_zeroes) {
   return string(abs((int)s.size() - max_zeroes), '0') + s;
 }
 
+Date::Date(int year, int month, int day) {
+  year_ = year;
+  month_ = month;
+  day_ = day;
+  date_ = AddLeadingZeroes(year_, 4) + '-' + AddLeadingZeroes(month_, 2) + '-' +
+          AddLeadingZeroes(day_, 2);
+}
+
 Date::Date(string &date) {
   auto it_first = begin(date);
   auto it_second = find(it_first, end(date), '-');
   year_ = stoi(string(it_first, it_second));
 
   it_first = it_second + 1;
-  auto it_second = find(it_first, end(date), '-');
+  it_second = find(it_first, end(date), '-');
   month_ = stoi(string(it_first, it_second));
 
   it_first = it_second + 1;
@@ -35,8 +41,8 @@ time_t Date::AsTimestamp() const {
   t.tm_min = 0;
   t.tm_hour = 0;
   t.tm_mday = day_;
-  t.tm_mon = month_ - 1;
-  t.tm_year = year_ - 1900;
+  t.tm_mon = month_;
+  t.tm_year = year_;
   t.tm_isdst = 0;
   return mktime(&t);
 }
@@ -48,19 +54,31 @@ const Date ParseDate(istream &is) {
   return date;
 }
 
-bool &operator<(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() < 0;
+bool operator<(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() < 0.;
 }
 
-bool &operator==(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() == 0;
+bool operator>(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() > 0.;
 }
 
-bool &operator!=(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() != 0;
+bool operator>=(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() >= 0.;
+}
+
+bool operator<=(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() <= 0.;
+}
+
+bool operator==(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() == 0.;
+}
+
+bool operator!=(const Date &lhs, const Date &rhs) {
+  return lhs.AsTimestamp() - rhs.AsTimestamp() != 0.;
 }
 
 ostream &operator<<(ostream &os, const Date &d) {
-  os << d.date_;
+  os << d.GetDate();
   return os;
 }

@@ -1,4 +1,4 @@
-#include "condition_parser.h"
+#include "../condition_parser.h"
 #include "test_runner.h"
 
 #include <sstream>
@@ -75,4 +75,30 @@ void TestParseCondition() {
     Assert(!root->Evaluate({2016, 1, 1}, "event"), "Parse condition 29");
     Assert(root->Evaluate({2016, 1, 2}, "event"), "Parse condition 30");
   }
+}
+
+void TestParseEvent() {
+  {
+    istringstream is("event");
+    AssertEqual(ParseEvent(is), "event", "Parse event without leading spaces");
+  }
+  {
+    istringstream is("   sport event ");
+    AssertEqual(ParseEvent(is), "sport event ",
+                "Parse event with leading spaces");
+  }
+  {
+    istringstream is("  first event  \n  second event");
+    vector<string> events;
+    events.push_back(ParseEvent(is));
+    events.push_back(ParseEvent(is));
+    AssertEqual(events, vector<string>{"first event  ", "second event"},
+                "Parse multiple events");
+  }
+}
+
+void TestAll() {
+  TestRunner tr;
+  tr.RunTest(TestParseEvent, "TestParseEvent");
+  tr.RunTest(TestParseCondition, "TestParseCondition");
 }

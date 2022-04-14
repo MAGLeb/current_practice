@@ -1,29 +1,22 @@
 #include "condition_parser.h"
 #include "database.h"
 #include "date.h"
-#include "node.h"
-#include "test_runner.h"
-
-#include <iostream>
-#include <stdexcept>
 
 using namespace std;
 
+ostream &operator<<(ostream &os, const pair<Date, string> &p) {
+  os << p.first << ' ' << p.second;
+  return os;
+}
+
 const string ParseEvent(istream &is) {
   string s;
-  is >> s;
+  getline(is, s);
+  s.erase(0, 1);
   return s;
 }
 
-void TestAll() {
-  TestRunner tr;
-  tr.RunTest(TestParseEvent, "TestParseEvent");
-  tr.RunTest(TestParseCondition, "TestParseCondition");
-}
-
 int main() {
-    TestAll();
-
   Database db;
 
   for (string line; getline(cin, line);) {
@@ -69,24 +62,4 @@ int main() {
   }
 
   return 0;
-}
-
-void TestParseEvent() {
-  {
-    istringstream is("event");
-    AssertEqual(ParseEvent(is), "event", "Parse event without leading spaces");
-  }
-  {
-    istringstream is("   sport event ");
-    AssertEqual(ParseEvent(is), "sport event ",
-                "Parse event with leading spaces");
-  }
-  {
-    istringstream is("  first event  \n  second event");
-    vector<string> events;
-    events.push_back(ParseEvent(is));
-    events.push_back(ParseEvent(is));
-    AssertEqual(events, vector<string>{"first event  ", "second event"},
-                "Parse multiple events");
-  }
 }

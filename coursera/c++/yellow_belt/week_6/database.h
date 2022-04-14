@@ -1,5 +1,6 @@
 #pragma once
 
+#include <bits/stdc++.h>
 #include <iostream>
 #include <map>
 #include <memory>
@@ -10,17 +11,19 @@
 
 using namespace std;
 
-struct CustomCompare {
-  bool operator()(const pair<Date, string> &lhs, const pair<Date, string> &rhs);
+struct CustomCompare final {
+  bool operator()(const pair<Date, string> &lhs,
+                  const pair<Date, string> &rhs) const;
 };
 
-class DataBase {
+class Database {
 public:
   void Add(const Date &date, const string &event);
   void Print(ostream &os) const;
-  void RemoveIf();
-  void FindIf();
-  Date Last(const Date &date);
+  int RemoveIf(function<bool(const Date &date, const string &event)> predicate);
+  vector<pair<Date, string>>
+  FindIf(function<bool(const Date &date, const string &event)> predicate) const;
+  pair<Date, string> Last(const Date &date) const;
 
 private:
   map<Date, vector<string>> date_event_mapper;
