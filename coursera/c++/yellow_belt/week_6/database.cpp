@@ -3,52 +3,8 @@
 #include <set>
 
 #include "database.h"
+#include "utils.h"
 using namespace std;
-
-ostream &operator<<(ostream &os, const pair<Date, string> &p) {
-  os << p.first << ' ' << p.second;
-  return os;
-}
-
-template <class T> ostream &operator<<(ostream &os, const vector<T> &s) {
-  os << "{";
-  bool first = true;
-  for (const auto &x : s) {
-    if (!first) {
-      os << ", ";
-    }
-    first = false;
-    os << x;
-  }
-  return os << "}";
-}
-
-template <class T> ostream &operator<<(ostream &os, const set<T> &s) {
-  os << "{";
-  bool first = true;
-  for (const auto &x : s) {
-    if (!first) {
-      os << ", ";
-    }
-    first = false;
-    os << x;
-  }
-  return os << "}";
-}
-
-template <class K, class V>
-ostream &operator<<(ostream &os, const map<K, V> &m) {
-  os << "{";
-  bool first = true;
-  for (const auto &kv : m) {
-    if (!first) {
-      os << ", ";
-    }
-    first = false;
-    os << kv.first << ": " << kv.second;
-  }
-  return os << "}";
-}
 
 void Database::Add(const Date &date, const string &event) {
   int prev_size = date_event_set.size();
@@ -59,9 +15,7 @@ void Database::Add(const Date &date, const string &event) {
       date_event_mapper.insert({date, {event}});
     else
       date_event_mapper.at(date).push_back(event);
-  } else
-    cerr << "Event: " << event << ", dated: " << date
-         << ", was not added to date_event_mapper." << endl;
+  }
 }
 
 void Database::Print(ostream &os) const {
@@ -82,11 +36,13 @@ void Database::Print(ostream &os) const {
 }
 
 pair<Date, string> Database::Last(const Date &date) const {
-  auto it =
-      find_if(begin(date_event_set), end(date_event_set),
-              [date](const pair<Date, string> &p) { return date < p.first; });
+  vector<pair<Date, string>> v(begin(date_event_set), end(date_event_set));
+  auto it = lower_bound(begin(v), end(v), date,
+                        [](const pair<Date, string> &p, const Date &date_) {
+                          return date_ >= p.first;
+                        });
 
-  if (it-- == begin(date_event_set))
+  if (it-- == begin(v))
     throw invalid_argument("No dates before");
 
   return make_pair(it->first, date_event_mapper.at(it->first).back());

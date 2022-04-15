@@ -24,5 +24,3 @@ private:
   map<Date, vector<string>> date_event_mapper;
   set<pair<Date, string>> date_event_set;
 };
-
-ostream &operator<<(ostream &os, const pair<Date, string> &p);

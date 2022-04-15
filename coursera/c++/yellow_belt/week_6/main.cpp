@@ -1,13 +1,14 @@
 #include "condition_parser.h"
 #include "database.h"
 #include "date.h"
+#include "utils.h"
 
 using namespace std;
 
 const string ParseEvent(istream &is) {
   string s;
+  is >> ws;
   getline(is, s);
-  s.erase(0, 1);
   return s;
 }
 

@@ -77,8 +77,3 @@ bool operator==(const Date &lhs, const Date &rhs) {
 bool operator!=(const Date &lhs, const Date &rhs) {
   return lhs.AsTimestamp() - rhs.AsTimestamp() != 0.;
 }
-
-ostream &operator<<(ostream &os, const Date &d) {
-  os << d.GetDate();
-  return os;
-}
