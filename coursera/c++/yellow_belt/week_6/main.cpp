@@ -4,11 +4,6 @@
 
 using namespace std;
 
-ostream &operator<<(ostream &os, const pair<Date, string> &p) {
-  os << p.first << ' ' << p.second;
-  return os;
-}
-
 const string ParseEvent(istream &is) {
   string s;
   getline(is, s);

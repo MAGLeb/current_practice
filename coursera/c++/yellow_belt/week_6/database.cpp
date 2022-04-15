@@ -5,6 +5,11 @@
 #include "database.h"
 using namespace std;
 
+ostream &operator<<(ostream &os, const pair<Date, string> &p) {
+  os << p.first << ' ' << p.second;
+  return os;
+}
+
 template <class T> ostream &operator<<(ostream &os, const vector<T> &s) {
   os << "{";
   bool first = true;
@@ -46,29 +51,21 @@ ostream &operator<<(ostream &os, const map<K, V> &m) {
 }
 
 void Database::Add(const Date &date, const string &event) {
-  auto it = find_if(begin(date_event_set), end(date_event_set),
-                    [date, event](const pair<Date, string> &p) {
-                      return p.first == date && p.second == event;
-                    });
-  if (it == end(date_event_set)) {
-    date_event_set.insert(make_pair(date, event));
-    auto it_mapper = find_if(begin(date_event_mapper), end(date_event_mapper),
-                             [date](const pair<Date, vector<string>> &p) {
-                               return date == p.first;
-                             });
+  int prev_size = date_event_set.size();
+  date_event_set.insert(make_pair(date, event));
 
-    if (it_mapper == end(date_event_mapper))
+  if (prev_size != date_event_set.size()) {
+    if (date_event_mapper.count(date) == 0)
       date_event_mapper.insert({date, {event}});
     else
-      (*it_mapper).second.push_back(event);
+      date_event_mapper.at(date).push_back(event);
   } else
     cerr << "Event: " << event << ", dated: " << date
          << ", was not added to date_event_mapper." << endl;
 }
 
 void Database::Print(ostream &os) const {
-  string s = "0-0-0";
-  Date date(s);
+  Date date(0, 0, 0);
   bool first = true;
 
   for (auto p : date_event_set) {
@@ -102,17 +99,20 @@ int Database::RemoveIf(function<bool(const Date &, const string &)> predicate) {
                                return predicate(p.first, p.second);
                              });
   int result = distance(begin(v), it);
-  date_event_set = set<pair<Date, string>, CustomCompare>(it, end(v));
+  date_event_set = set<pair<Date, string>>(it, end(v));
 
-  auto start = begin(v);
-  while (start != it) {
-    auto it_event = find(begin(date_event_mapper.at((*start).first)),
-                         end(date_event_mapper.at((*start).first)), (*start).second);
-    date_event_mapper.at((*start).first).erase(it_event);
-    if (date_event_mapper.at(start->first).empty()) {
-      date_event_mapper.erase(start->first);
-    }
-    start++;
+  for (auto it_mapper = date_event_mapper.cbegin(), next_it = it_mapper;
+       it_mapper != date_event_mapper.cend(); it_mapper = next_it) {
+    ++next_it;
+    auto &map_vec = date_event_mapper.at(it_mapper->first);
+    auto it_m = stable_partition(begin(map_vec), end(map_vec),
+                                 [it_mapper, predicate](const string &s) {
+                                   return predicate(it_mapper->first, s);
+                                 });
+    if (it_m == end(map_vec))
+      date_event_mapper.erase(it_mapper);
+    else
+      map_vec.erase(begin(map_vec), it_m);
   }
 
   return result;
@@ -126,13 +126,4 @@ Database::FindIf(function<bool(const Date &, const string &)> predicate) const {
       result.push_back(p);
   }
   return result;
-}
-
-bool CustomCompare::operator()(const pair<Date, string> &lhs,
-                               const pair<Date, string> &rhs) const {
-  if (lhs.first == rhs.first) {
-    return lhs.second < rhs.second;
-  } else {
-    return lhs.first < rhs.first;
-  }
 }

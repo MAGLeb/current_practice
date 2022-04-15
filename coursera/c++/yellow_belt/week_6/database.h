@@ -11,11 +11,6 @@
 
 using namespace std;
 
-struct CustomCompare final {
-  bool operator()(const pair<Date, string> &lhs,
-                  const pair<Date, string> &rhs) const;
-};
-
 class Database {
 public:
   void Add(const Date &date, const string &event);
@@ -27,5 +22,7 @@ public:
 
 private:
   map<Date, vector<string>> date_event_mapper;
-  set<pair<Date, string>, CustomCompare> date_event_set;
+  set<pair<Date, string>> date_event_set;
 };
+
+ostream &operator<<(ostream &os, const pair<Date, string> &p);
