@@ -56,7 +56,9 @@ pair<Date, string> Database::Last(const Date &date) const {
   auto it = date_event_set.lower_bound(date.GetDate());
   string val;
 
-  if (it == end(date_event_set))
+  if (it == end(date_event_set) && it == begin(date_event_set))
+    throw invalid_argument("No dates before");
+  else if (it == end(date_event_set))
     it--;
   else {
     val = GetDateFromString(*it);
@@ -84,9 +86,6 @@ int Database::RemoveIf(function<bool(const Date &, const string &)> predicate) {
     string event = GetEventFromString(*it);
     Date key_(date);
 
-    //    cout << "SET: " << date_event_set << endl;
-    //    cout << "MAP: " << date_event_mapper << endl;
-
     if (predicate(key_, event))
       it = date_event_set.erase(it);
     else {
@@ -110,30 +109,6 @@ int Database::RemoveIf(function<bool(const Date &, const string &)> predicate) {
 
   result -= date_event_set.size();
   return result;
-
-  //  vector<pair<Date, string>> v(begin(date_event_set), end(date_event_set));
-  //  auto it = stable_partition(v.begin(), v.end(),
-  //                             [predicate](const pair<Date, string> &p) {
-  //                               return predicate(p.first, p.second);
-  //                             });
-  //  int result = distance(begin(v), it);
-  //  date_event_set = set<pair<Date, string>>(it, end(v));
-  //
-  //  for (auto it_mapper = date_event_mapper.cbegin(), next_it = it_mapper;
-  //       it_mapper != date_event_mapper.cend(); it_mapper = next_it) {
-  //    ++next_it;
-  //    auto &map_vec = date_event_mapper.at(it_mapper->first);
-  //    auto it_m = stable_partition(begin(map_vec), end(map_vec),
-  //                                 [it_mapper, predicate](const string &s) {
-  //                                   return predicate(it_mapper->first, s);
-  //                                 });
-  //    if (it_m == end(map_vec))
-  //      date_event_mapper.erase(it_mapper);
-  //    else
-  //      map_vec.erase(begin(map_vec), it_m);
-  //  }
-  //
-  //  return result;
 }
 
 vector<string>
