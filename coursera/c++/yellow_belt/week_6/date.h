@@ -9,7 +9,6 @@ public:
   Date(string &date);
   Date(int year, int month, int day);
   string GetDate() const;
-  time_t AsTimestamp() const;
 
 private:
   string date_;

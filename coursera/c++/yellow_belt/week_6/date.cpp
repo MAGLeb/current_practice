@@ -35,18 +35,6 @@ Date::Date(string &date) {
 
 string Date::GetDate() const { return date_; }
 
-time_t Date::AsTimestamp() const {
-  tm t;
-  t.tm_sec = 0;
-  t.tm_min = 0;
-  t.tm_hour = 0;
-  t.tm_mday = day_;
-  t.tm_mon = month_;
-  t.tm_year = year_;
-  t.tm_isdst = 0;
-  return mktime(&t);
-}
-
 const Date ParseDate(istream &is) {
   string s;
   is >> s;
@@ -55,25 +43,25 @@ const Date ParseDate(istream &is) {
 }
 
 bool operator<(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() < 0.;
+  return lhs.GetDate() < rhs.GetDate();
 }
 
 bool operator>(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() > 0.;
+  return lhs.GetDate() > rhs.GetDate();
 }
 
 bool operator>=(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() >= 0.;
+  return lhs.GetDate() >= rhs.GetDate();
 }
 
 bool operator<=(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() <= 0.;
+  return lhs.GetDate() <= rhs.GetDate();
 }
 
 bool operator==(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() == 0.;
+  return lhs.GetDate() == rhs.GetDate();
 }
 
 bool operator!=(const Date &lhs, const Date &rhs) {
-  return lhs.AsTimestamp() - rhs.AsTimestamp() != 0.;
+  return lhs.GetDate() != rhs.GetDate();
 }

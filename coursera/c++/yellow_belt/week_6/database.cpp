@@ -6,6 +6,15 @@
 #include "utils.h"
 using namespace std;
 
+pair<string, string> ParseStringDateEvent(const string &val) {
+  auto it = begin(val);
+  for (; it != end(val); it++) {
+    if (*it == ' ')
+      break;
+  }
+  return make_pair(string(begin(val), it), string(++it, end(val)));
+}
+
 string GetDateFromString(const string &val) {
   auto it = begin(val);
   for (; it != end(val); it++) {
@@ -25,14 +34,34 @@ string GetEventFromString(const string &val) {
 }
 
 void Database::Add(const Date &date, const string &event) {
-  int prev_size = date_event_set.size();
-  date_event_set.insert(date.GetDate() + ' ' + event);
+  auto p = date_event_set.insert(date.GetDate() + ' ' + event);
 
-  if (prev_size != date_event_set.size()) {
-    if (date_event_mapper.count(date) == 0)
+  if (p.second) {
+    auto it = p.first;
+
+    if (date_event_set.size() == 1) {
       date_event_mapper.insert({date, {event}});
-    else
-      date_event_mapper.at(date).push_back(event);
+    } else {
+      auto left = it;
+      auto right = it;
+      if (it++ == begin(date_event_set)) {
+        right++;
+        left++;
+      } else if (it == end(date_event_set)) {
+        left--;
+        right--;
+      } else {
+        left--;
+        right++;
+      }
+
+      string date_1 = GetDateFromString(*left);
+      string date_2 = GetDateFromString(*right);
+      if (date.GetDate() == date_1 || date.GetDate() == date_2)
+        date_event_mapper.at(date).push_back(event);
+      else
+        date_event_mapper.insert({date, {event}});
+    }
   }
 }
 
@@ -82,8 +111,9 @@ int Database::RemoveIf(function<bool(const Date &, const string &)> predicate) {
   Date key(0, 0, 0);
 
   while (it != date_event_set.end()) {
-    string date = GetDateFromString(*it);
-    string event = GetEventFromString(*it);
+    auto p = ParseStringDateEvent(*it);
+    string date = p.first;
+    string event = p.second;
     Date key_(date);
 
     if (predicate(key_, event))
