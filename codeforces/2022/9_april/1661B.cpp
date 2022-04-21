@@ -2,22 +2,31 @@
 
 using namespace std;
 
-int y = 32768;
+int DELIMITER = 32768;
 
-int find_mod(int x, int result) {
-  if(x > y)
-    return INT32_MAX;
-  if(x == y)
+int find_mod(int x, int result, vector<int> &m) {
+  if(result == 15)
     return result;
-  return min(find_mod(x * 2, result + 1), find_mod(x + 1, result + 1));
+
+  x %= DELIMITER;
+  if (x == 0)
+    return result;
+  if(m[x] != 0)
+    return m[x] + result;
+
+  return min(find_mod(x * 2, result + 1, m), find_mod(x + 1, result + 1, m));
 }
 
 int main() {
   int n;
   cin >> n;
-  while(n--) {
+  vector<int> memory(DELIMITER + 1, 0);
+
+  while (n--) {
     int w;
     cin >> w;
-    cout << find_mod(w, 0) << endl;
+    int counter = find_mod(w, 0, memory);
+    cout << counter << endl;
+    memory[w] = counter;
   }
 }

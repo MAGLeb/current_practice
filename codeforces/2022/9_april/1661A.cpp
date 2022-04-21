@@ -19,7 +19,7 @@ int main() {
       cin >> n_2[i];
     }
 
-    int result = 0;
+    uint64_t result = 0;
     for (int i = 1; i < k; ++i) {
       if (abs(n_1[i - 1] - n_1[i]) + abs(n_2[i - 1] - n_2[i]) >
           abs(n_1[i - 1] - n_2[i]) + abs(n_2[i - 1] - n_1[i])) {
