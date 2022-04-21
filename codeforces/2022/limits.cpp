@@ -3,5 +3,5 @@
 using namespace std;
 
 int main() {
-  cout << "INT max: " << numeric_limits<int>::max() << endl;
+  cout << "INT max: " << numeric_limits<uint64_t>::max() << endl;
 }
