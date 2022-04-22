@@ -3,31 +3,32 @@
 using namespace std;
 
 int main() {
-  vector<pair<char, int>> seq;
   int n;
   cin >> n;
-  int k = 0;
-  char prev = '0';
 
   while (n--) {
+    string res = "YES";
     char c;
-    cin >> c;
-    if(prev != '0') {
-      if(c == prev)
-        k++;
-      else
-        seq.push_back(make_pair(prev, k));
-        k = 0;
+    char prev = 'W';
+    map<char, int> mapper({{'B', 0}, {'R', 0}});
+    int k;
+    cin >> k;
+
+    while (k--) {
+      cin >> c;
+
+      if (c != 'W')
+        mapper[c]++;
+      else if (c != prev) {
+        if (min(mapper['B'], mapper['R']) < 1)
+          res = "NO";
+        mapper = map<char, int>({{'B', 0}, {'R', 0}});
+      }
+      prev = c;
     }
-    prev = c;
+
+    if (c != 'W' && min(mapper['B'], mapper['R']) < 1)
+      res = "NO";
+    cout << res << endl;
   }
 }
-
-/*
-RBWBW
-10202
-102002
-
-0000001002011110
-5-0; 1-1; 2-0; 1-2; 1-0; 4-1; 1-0
-5121141
