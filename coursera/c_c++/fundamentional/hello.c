@@ -1,13 +1,9 @@
-#include <math.h> /* has  sin(), abs(), and fabs() */
+#include <math.h>
 #include <stdio.h>
 int main(void) {
-  double interval;
-  int i;
-  for (i = 0; i < 30; i++) {
-    interval = i / 10.0;
-    printf("sin(% lf) = % lf \t", interval, fabs(sin(interval)));
+  for (float i = 0; i < 1; i = i + 0.01) {
+    printf("SIN of val %lf: %lf", i, sin(i));
+    printf(" and COS: %lf\n", cos(i));
   }
-
-  printf("\n++ ++ ++ +\n");
-  return 0;
+    return 0;
 }
