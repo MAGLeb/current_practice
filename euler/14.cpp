@@ -2,9 +2,9 @@
 
 using namespace std;
 
-uint64_t find_path(int n, map<int, int> &mapper) {
+uint64_t find_path(uint64_t n, map<int, uint64_t> &mapper) {
   vector<int> inter;
-  int k = n;
+  uint64_t k = n;
   while (n != 1) {
     if (n < k) {
       break;
@@ -16,7 +16,7 @@ uint64_t find_path(int n, map<int, int> &mapper) {
       n = 3 * n + 1;
   }
 
-  int ans = inter.size() + mapper.at(n);
+  uint64_t ans = inter.size() + mapper.at(n);
 
   for (auto val : inter) {
     mapper[val] = ans--;
@@ -26,12 +26,12 @@ uint64_t find_path(int n, map<int, int> &mapper) {
 }
 
 int main() {
-  map<int, int> result({make_pair(1, 1)});
-  int answer = 0;
+  map<int, uint64_t> result({make_pair(1, 1)});
+  uint64_t answer = 0;
   int res = 0;
 
-  for (int i = 2; i < 14; i++) {
-    int new_answer = find_path(i, result);
+  for (int i = 2; i < 1'000'000; i++) {
+    uint64_t new_answer = find_path(i, result);
     if (new_answer > answer)
       res = i;
     answer = max(answer, new_answer);
