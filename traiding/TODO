@@ -1,0 +1,3 @@
+1. write to logger if sell or buy or any warnings
+2. refactor "_load_historical_data"
+3. add History class for saving bargains
