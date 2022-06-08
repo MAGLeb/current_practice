@@ -47,7 +47,7 @@ def create_dataframe_from_data(data, source: ClientType):
         df.drop(["quote_asset_volume", "taker_buy_quote", "taker_buy_base", "number_of_trades"], inplace=True, axis=1)
 
     df['diff'] = df['Close'] - df['Open']
-    df.loc[df['diff'] >= 0, 'color'] = 'green'
+    df['color'] = 'green'
     df.loc[df['diff'] < 0, 'color'] = 'red'
 
     return df

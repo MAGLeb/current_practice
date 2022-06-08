@@ -3,9 +3,9 @@ from typing import Union
 
 from pybit.spot import HTTP as BybitClient
 
-from base_client import ClientBase
-from utils import convert_to_datetime
+from core.client.base_client import ClientBase
 from core.dataclass import TypeBargainSellBuy
+from utils import convert_to_datetime
 from constants import URL_API_BYBIT, URL_API_BYBIT_TESTNET
 
 
@@ -47,13 +47,15 @@ class ByBit(ClientBase):
         symbol = result['symbol']
         qty = result['origQty']
 
-        print(f"{sell_or_buy} {qty} of {symbol} at {convert_to_datetime(timestamp)}. Order id: {order_id}.")
         return order_id
 
     def get_current_balance_coin(self, coin: str):
         balance = self.api.get_wallet_balance()['result']['balances']
-        coin_info = list(filter(lambda x: x['coin'] == coin, balance))[0]
-        coin_free_balance = coin_info['free']
+        coin_info = list(filter(lambda x: x['coin'] == coin, balance))
+        if len(coin_info):
+            coin_free_balance = coin_info[0]['free']
+        else:
+            coin_free_balance = 0
         return float(coin_free_balance)
 
     def price_in_order(self, order_id: int):

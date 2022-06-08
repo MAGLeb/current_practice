@@ -1,4 +1,7 @@
+from typing import Union
 from abc import abstractmethod
+
+from core.dataclass import TypeBargainSellBuy
 
 
 class ClientBase:
@@ -24,6 +27,10 @@ class ClientBase:
 
     @abstractmethod
     def _initialise_api_client(self):
+        pass
+
+    @abstractmethod
+    def place_order(self, coin: str, quantity: Union[float, int], sell_or_buy: TypeBargainSellBuy):
         pass
 
     @abstractmethod

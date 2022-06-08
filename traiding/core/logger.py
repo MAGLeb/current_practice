@@ -6,6 +6,9 @@ class Logger:
         self.logger = logging.getLogger("CUSTOM LOGGER")
         self._setup()
 
+    def info(self, message):
+        self.logger.info(message)
+
     def _setup(self):
         self.logger.setLevel(logging.DEBUG)
 
