@@ -13,9 +13,6 @@ void solve(set<map<int, int>> s) {
     ++m_[(int)s[s.size() - 1] - 48];
   }
 
-//  for(const auto& p : m_)
-//    cout << p.first << ' ' << p.second << endl;
-
   bool result = false;
   for (const auto &m_s : s) {
     bool res = true;

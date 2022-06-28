@@ -21,11 +21,11 @@ void solve() {
   int end_d = 0;
 
   while (k != s) {
-    while (v[start] != 1 and start < end) {
+    while (v[start] != 1 and start <= end) {
       ++start;
       ++start_d;
     }
-    while (v[end] != 1 and end > start) {
+    while (v[end] != 1 and end >= start) {
       --end;
       ++end_d;
     }
@@ -39,6 +39,8 @@ void solve() {
       result += start_d + 1;
       start_d = 0;
       ++start;
+    }else if(start_d == end_d) {
+
     } else {
       result += end_d + 1;
       end_d = 0;
